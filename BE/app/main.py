@@ -4,7 +4,18 @@ from app.drivers.routes import router as drivers_router
 from app.shipments.routes import router as shipments_router
 from app.deliveries.routes import router as deliveries_router
 
-app = FastAPI()
+app = FastAPI(
+     title="Logistics Management System",  
+    description=(
+        "This is the API documentation for the Logistics Management System. "
+        "It provides endpoints for managing deliveries, shipments, drivers, and more."
+    ),  
+    version="1.0.0", 
+    contact={
+        "name": "UHIRIWE Anne Leslie",
+        "email": "anneuhiriwe@gmail.com",
+    },
+)
 
 app.include_router(accounts_router, prefix="/accounts", tags=["Accounts"])
 app.include_router(drivers_router, prefix="/drivers", tags=["Drivers"])
