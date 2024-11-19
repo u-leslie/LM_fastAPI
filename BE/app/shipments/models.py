@@ -10,5 +10,4 @@ class Shipment(Base):
     destination = Column(String)
     status = Column(String, default="pending")
     driver_id = Column(Integer, ForeignKey("drivers.id"))
-
-    driver = relationship("Driver")
+    driver = relationship("Driver", back_populates="shipments")
