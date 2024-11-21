@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import HTTPBearer
 from sqlalchemy.orm import Session, joinedload
 from app.core.database import get_db
-from app.core.auth import decode_access_token  # Import the token decoder
+from app.core.auth import decode_access_token 
 from . import models, schemas
 
 security = HTTPBearer()
