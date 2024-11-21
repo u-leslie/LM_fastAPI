@@ -1,4 +1,6 @@
+from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from app.core.auth import create_access_token, verify_password, get_password_hash
@@ -17,8 +19,8 @@ def signup(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return {"message": "User created successfully"}
 
 @router.post("/login/")
-def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+def login(user: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session = Depends(get_db)):
+    db_user = db.query(models.User).filter(models.User.email == user.username).first()
     print(db_user)
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
