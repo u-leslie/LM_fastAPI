@@ -19,7 +19,8 @@ app = FastAPI(
     },
 )
 
-# Include your routers
+
+
 app.include_router(accounts_router, prefix="/accounts", tags=["Accounts"])
 app.include_router(drivers_router, prefix="/drivers", tags=["Drivers"])
 app.include_router(shipments_router, prefix="/shipments", tags=["Shipments"])
