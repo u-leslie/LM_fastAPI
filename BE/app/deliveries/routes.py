@@ -13,7 +13,7 @@ router = APIRouter()
 def create_delivery(
     delivery: schemas.DeliveryCreate,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),  
+    # current_user: dict = Depends(decode_access_token),  
 ):
     db_delivery = models.Delivery(**delivery.dict())
     db.add(db_delivery)
@@ -25,7 +25,7 @@ def create_delivery(
 def get_delivery(
     delivery_id: int,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),  
+    # current_user: dict = Depends(decode_access_token),  
 ):
     db_delivery = (
         db.query(models.Delivery)
@@ -42,7 +42,7 @@ def list_deliveries(
     skip: int = 0,
     limit: int = 10,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),  
+    # current_user: dict = Depends(decode_access_token),  
 ):
     deliveries = (
         db.query(models.Delivery)
@@ -58,7 +58,7 @@ def update_delivery(
     delivery_id: int,
     delivery_update: schemas.DeliveryBase,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),  
+    # current_user: dict = Depends(decode_access_token),  
 ):
     db_delivery = db.query(models.Delivery).filter(models.Delivery.id == delivery_id).first()
     if not db_delivery:
@@ -73,7 +73,7 @@ def update_delivery(
 def delete_delivery(
     delivery_id: int,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),  
+    # current_user: dict = Depends(decode_access_token),  
 ):
     db_delivery = db.query(models.Delivery).filter(models.Delivery.id == delivery_id).first()
     if not db_delivery:

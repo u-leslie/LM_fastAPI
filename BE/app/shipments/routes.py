@@ -13,7 +13,7 @@ router = APIRouter()
 def create_shipment(
     shipment: schemas.ShipmentCreate,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),  
+    # current_user: dict = Depends(decode_access_token),  
 ):
     db_shipment = models.Shipment(**shipment.dict())
     db.add(db_shipment)
@@ -24,7 +24,7 @@ def create_shipment(
 @router.get("/shipments/", response_model=list[schemas.Shipment])
 def get_all_shipments(
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),
+    # current_user: dict = Depends(decode_access_token),
 ):
     return db.query(models.Shipment).options(joinedload(models.Shipment.driver)).all()
 
@@ -32,7 +32,7 @@ def get_all_shipments(
 def get_shipment(
     shipment_id: int,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),
+    # current_user: dict = Depends(decode_access_token),
 ):
     shipment = db.query(models.Shipment).filter(models.Shipment.id == shipment_id).first()
     if not shipment:
@@ -44,7 +44,7 @@ def update_shipment(
     shipment_id: int,
     shipment_update: schemas.ShipmentUpdate,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token)
+    # current_user: dict = Depends(decode_access_token)
 ):
     shipment = db.query(models.Shipment).filter(models.Shipment.id == shipment_id).first()
     if not shipment:
@@ -61,7 +61,7 @@ def update_shipment(
 def delete_shipment(
     shipment_id: int,
     db: Session = Depends(get_db),
-    current_user: dict = Depends(decode_access_token),  
+    # current_user: dict = Depends(decode_access_token),  
 ):
     shipment = db.query(models.Shipment).filter(models.Shipment.id == shipment_id).first()
     if not shipment:
